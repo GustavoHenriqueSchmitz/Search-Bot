@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Um bot que pesquisa de acordo com o que o usuário pedir, seguindo os primeiros 5 resultados, sem ser anúncio. Trazendo o nome do site pesquisado, e a quantia de linhas do primeiro parágrafo do site.",
   "main": "main.js",
+  "type": "commonjs",
   "scripts": {
     "dev": "ts-node main.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -26,12 +27,15 @@
   },
   "homepage": "https://github.com/GustavoHenriqueSchmitz/Bot-de-Pesquisa#readme",
   "dependencies": {
+    "geckodriver": "^3.1.0",
+    "selenium-webdriver": "^4.5.0",
     "ts-node": "^10.9.1",
     "typescript": "^4.8.4"
   },
   "devDependencies": {
+    "@types/node": "^14.11.2",
+    "@types/selenium-webdriver": "^4.1.5",
     "gts": "^3.1.1",
-    "typescript": "~4.7.0",
-    "@types/node": "^14.11.2"
+    "typescript": "~4.7.0"
   }
 }
