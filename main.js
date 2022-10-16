@@ -39,54 +39,48 @@ exports.__esModule = true;
 var selenium_webdriver_1 = require("selenium-webdriver");
 function initBot() {
     return __awaiter(this, void 0, void 0, function () {
-        var driver, links, _a, counter, validLink, elementLink, _b, _c, error_1, elementText, text, _d, _e, _f;
-        return __generator(this, function (_g) {
-            switch (_g.label) {
+        var driver, elementsLink, links, counter, link, _a, _b, elementText, text, _c, _d, _e;
+        return __generator(this, function (_f) {
+            switch (_f.label) {
                 case 0: return [4 /*yield*/, new selenium_webdriver_1.Builder().forBrowser('firefox').build()];
                 case 1:
-                    driver = _g.sent();
+                    driver = _f.sent();
                     return [4 /*yield*/, driver.get('https://www.google.com/search?q=Parkour')];
                 case 2:
-                    _g.sent();
-                    links = [];
-                    _a = [0, 0], counter = _a[0], validLink = _a[1];
-                    _g.label = 3;
+                    _f.sent();
+                    return [4 /*yield*/, driver.findElements(selenium_webdriver_1.By.className('yuRUbf'))];
                 case 3:
-                    if (!(validLink < 5 && counter < 20)) return [3 /*break*/, 9];
-                    _g.label = 4;
+                    elementsLink = _f.sent();
+                    links = [];
+                    counter = 0;
+                    _f.label = 4;
                 case 4:
-                    _g.trys.push([4, 7, , 8]);
-                    return [4 /*yield*/, driver.findElement(selenium_webdriver_1.By.xpath("/html/body/div[7]/div/div[11]/div/div[2]/div[2]/div/div/div[".concat(counter, "]/div/div/div[1]/div/a")))];
+                    if (!(counter < 5)) return [3 /*break*/, 8];
+                    return [4 /*yield*/, elementsLink[counter].findElement(selenium_webdriver_1.By.css('a'))];
                 case 5:
-                    elementLink = _g.sent();
-                    _b = links;
-                    _c = validLink;
-                    return [4 /*yield*/, elementLink.getAttribute('href')];
+                    link = _f.sent();
+                    _b = (_a = links).push;
+                    return [4 /*yield*/, link.getAttribute('href')];
                 case 6:
-                    _b[_c] = _g.sent();
-                    validLink += 1;
-                    return [3 /*break*/, 8];
+                    _b.apply(_a, [_f.sent()]);
+                    _f.label = 7;
                 case 7:
-                    error_1 = _g.sent();
-                    return [3 /*break*/, 8];
-                case 8:
                     counter += 1;
-                    return [3 /*break*/, 3];
-                case 9: return [4 /*yield*/, driver.get(links[0])];
-                case 10:
-                    _g.sent();
+                    return [3 /*break*/, 4];
+                case 8: return [4 /*yield*/, driver.get(links[0])];
+                case 9:
+                    _f.sent();
                     return [4 /*yield*/, driver.findElement(selenium_webdriver_1.By.xpath('/html/body/div[1]/div/div[4]/main/div[2]/div[3]/div[1]/p[1]'))];
-                case 11:
-                    elementText = _g.sent();
+                case 10:
+                    elementText = _f.sent();
                     return [4 /*yield*/, elementText.getText()];
-                case 12:
-                    text = _g.sent();
-                    _e = (_d = console).log;
-                    _f = "Site: ".concat;
+                case 11:
+                    text = _f.sent();
+                    _d = (_c = console).log;
+                    _e = "Site: ".concat;
                     return [4 /*yield*/, driver.getTitle()];
-                case 13:
-                    _e.apply(_d, [_f.apply("Site: ", [_g.sent(), " | PPL: "])]);
-                    console.log(text.split('/\r\n|\r|\n/').length);
+                case 12:
+                    _d.apply(_c, [_e.apply("Site: ", [_f.sent(), " | PPL: "]).concat(text.length)]);
                     return [2 /*return*/];
             }
         });
