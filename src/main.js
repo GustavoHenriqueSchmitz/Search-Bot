@@ -1,11 +1,11 @@
-import {Builder, By, WebDriver} from 'selenium-webdriver';
-import {Options} from 'selenium-webdriver/firefox';
+import {Builder, By} from 'selenium-webdriver';
+import {Options} from 'selenium-webdriver/firefox.js';
 import {question} from 'readline-sync';
 
 // Function initBot, initialize the bot
 async function initBot() {
   // Start the browser
-  const driver: WebDriver = await new Builder()
+  const driver = await new Builder()
     .setFirefoxOptions(new Options().headless())
     .forBrowser('firefox')
     .build();
@@ -28,7 +28,7 @@ async function initBot() {
     // Start search
     await driver.get(`https://www.google.com/search?q=${search}`);
     const elementsLink = await driver.findElements(By.className('yuRUbf'));
-    const links: string[] = [];
+    const links = [];
 
     // Get the links
     for (let counter = 0; counter < 5; counter += 1) {
