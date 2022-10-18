@@ -38,68 +38,129 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 exports.__esModule = true;
 var selenium_webdriver_1 = require("selenium-webdriver");
 var firefox_1 = require("selenium-webdriver/firefox");
+var readline_sync_1 = require("readline-sync");
+// Function initBot, initialize the bot
 function initBot() {
     return __awaiter(this, void 0, void 0, function () {
-        var driver, elementsLink, links, counter, link, _a, _b, elementText, text, textCharacters, vowels, consonant, _c, _d, _e;
-        return __generator(this, function (_f) {
-            switch (_f.label) {
+        var driver, search, elementsLink, links, counter, link, _a, _b, _loop_1, counter, searchAgain;
+        return __generator(this, function (_c) {
+            switch (_c.label) {
                 case 0: return [4 /*yield*/, new selenium_webdriver_1.Builder()
                         .setFirefoxOptions(new firefox_1.Options().headless())
                         .forBrowser('firefox')
                         .build()];
                 case 1:
-                    driver = _f.sent();
-                    return [4 /*yield*/, driver.get('https://www.google.com/search?q=Parkour')];
+                    driver = _c.sent();
+                    _c.label = 2;
                 case 2:
-                    _f.sent();
-                    return [4 /*yield*/, driver.findElements(selenium_webdriver_1.By.className('yuRUbf'))];
+                    if (!true) return [3 /*break*/, 14];
+                    search = '';
+                    // eslint-disable-next-line no-constant-condition
+                    while (true) {
+                        search = (0, readline_sync_1.question)('\nPesquisar por: ');
+                        if (search === '') {
+                            console.error('\x1b[31mValor para pesquisa vazio, digite algo.\x1b[0m');
+                            continue;
+                        }
+                        console.log('');
+                        break;
+                    }
+                    // Start search
+                    return [4 /*yield*/, driver.get("https://www.google.com/search?q=".concat(search))];
                 case 3:
-                    elementsLink = _f.sent();
+                    // Start search
+                    _c.sent();
+                    return [4 /*yield*/, driver.findElements(selenium_webdriver_1.By.className('yuRUbf'))];
+                case 4:
+                    elementsLink = _c.sent();
                     links = [];
                     counter = 0;
-                    _f.label = 4;
-                case 4:
-                    if (!(counter < 5)) return [3 /*break*/, 8];
-                    return [4 /*yield*/, elementsLink[counter].findElement(selenium_webdriver_1.By.css('a'))];
+                    _c.label = 5;
                 case 5:
-                    link = _f.sent();
+                    if (!(counter < 5)) return [3 /*break*/, 9];
+                    return [4 /*yield*/, elementsLink[counter].findElement(selenium_webdriver_1.By.css('a'))];
+                case 6:
+                    link = _c.sent();
                     _b = (_a = links).push;
                     return [4 /*yield*/, link.getAttribute('href')];
-                case 6:
-                    _b.apply(_a, [_f.sent()]);
-                    _f.label = 7;
                 case 7:
+                    _b.apply(_a, [_c.sent()]);
+                    _c.label = 8;
+                case 8:
                     counter += 1;
-                    return [3 /*break*/, 4];
-                case 8: return [4 /*yield*/, driver.get(links[0])];
+                    return [3 /*break*/, 5];
                 case 9:
-                    _f.sent();
-                    return [4 /*yield*/, driver.findElement(selenium_webdriver_1.By.css('body'))];
+                    _loop_1 = function (counter) {
+                        var elementText, text, textCharacters, vowels, consonant, _d, _e, _f;
+                        return __generator(this, function (_g) {
+                            switch (_g.label) {
+                                case 0: return [4 /*yield*/, driver.get(links[counter])];
+                                case 1:
+                                    _g.sent();
+                                    return [4 /*yield*/, driver.findElement(selenium_webdriver_1.By.css('body'))];
+                                case 2:
+                                    elementText = _g.sent();
+                                    return [4 /*yield*/, elementText.getText()];
+                                case 3:
+                                    text = _g.sent();
+                                    textCharacters = text.split('');
+                                    vowels = 0;
+                                    consonant = 0;
+                                    textCharacters.forEach(function (element) {
+                                        switch (element) {
+                                            case 'a' || 'e' || 'i' || 'o' || 'u':
+                                                vowels += 1;
+                                                break;
+                                            default:
+                                                consonant += 1;
+                                        }
+                                    });
+                                    // Print the results
+                                    _e = (_d = console).log;
+                                    _f = "Nome do Site: ".concat;
+                                    return [4 /*yield*/, driver.getTitle()];
+                                case 4:
+                                    // Print the results
+                                    _e.apply(_d, [_f.apply("Nome do Site: ", [_g.sent()])]);
+                                    console.log("URL: ".concat(links[counter]));
+                                    console.log("Contagem de vogais: ".concat(vowels));
+                                    console.log("Contagem de consoantes: ".concat(consonant, "\n"));
+                                    return [2 /*return*/];
+                            }
+                        });
+                    };
+                    counter = 0;
+                    _c.label = 10;
                 case 10:
-                    elementText = _f.sent();
-                    return [4 /*yield*/, elementText.getText()];
+                    if (!(counter < 5)) return [3 /*break*/, 13];
+                    return [5 /*yield**/, _loop_1(counter)];
                 case 11:
-                    text = _f.sent();
-                    textCharacters = text.split('');
-                    vowels = 0;
-                    consonant = 0;
-                    textCharacters.forEach(function (element) {
-                        switch (element) {
-                            case 'a' || 'e' || 'i' || 'o' || 'u':
-                                vowels += 1;
-                                break;
-                            default:
-                                consonant += 1;
-                        }
-                    });
-                    _d = (_c = console).log;
-                    _e = "Site: ".concat;
-                    return [4 /*yield*/, driver.getTitle()];
+                    _c.sent();
+                    _c.label = 12;
                 case 12:
-                    _d.apply(_c, [_e.apply("Site: ", [_f.sent()])]);
-                    console.log("Contagem de vogais: ".concat(vowels));
-                    console.log("Contagem de consoantes: ".concat(consonant));
-                    return [2 /*return*/];
+                    counter += 1;
+                    return [3 /*break*/, 10];
+                case 13:
+                    searchAgain = '';
+                    // eslint-disable-next-line no-constant-condition
+                    while (true) {
+                        searchAgain = (0, readline_sync_1.question)('Fazer outra pesquisa [S/N]: ')
+                            .trim()
+                            .toUpperCase();
+                        if (searchAgain !== 'N' && searchAgain !== 'S') {
+                            console.error('\x1b[31mOpção inválida! Digite S para sim ou N para não.\x1b[0m');
+                            continue;
+                        }
+                        break;
+                    }
+                    if (searchAgain === 'N') {
+                        return [3 /*break*/, 14];
+                    }
+                    else {
+                        return [3 /*break*/, 2];
+                    }
+                    return [3 /*break*/, 2];
+                case 14: return [2 /*return*/];
             }
         });
     });
