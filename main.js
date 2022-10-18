@@ -40,7 +40,7 @@ var selenium_webdriver_1 = require("selenium-webdriver");
 var firefox_1 = require("selenium-webdriver/firefox");
 function initBot() {
     return __awaiter(this, void 0, void 0, function () {
-        var driver, elementsLink, links, counter, link, _a, _b, elementText, text, textCharacters, lines, charactersCounter, _c, _d, _e;
+        var driver, elementsLink, links, counter, link, _a, _b, elementText, text, textCharacters, vowels, consonant, _c, _d, _e;
         return __generator(this, function (_f) {
             switch (_f.label) {
                 case 0: return [4 /*yield*/, new selenium_webdriver_1.Builder()
@@ -74,27 +74,31 @@ function initBot() {
                 case 8: return [4 /*yield*/, driver.get(links[0])];
                 case 9:
                     _f.sent();
-                    return [4 /*yield*/, driver.findElement(selenium_webdriver_1.By.xpath('/html/body/div[3]/div/div[2]/div/div[2]/article/div/div/div[2]/p[1]'))];
+                    return [4 /*yield*/, driver.findElement(selenium_webdriver_1.By.css('body'))];
                 case 10:
                     elementText = _f.sent();
                     return [4 /*yield*/, elementText.getText()];
                 case 11:
                     text = _f.sent();
                     textCharacters = text.split('');
-                    lines = 0;
-                    charactersCounter = 0;
+                    vowels = 0;
+                    consonant = 0;
                     textCharacters.forEach(function (element) {
-                        charactersCounter += 1;
-                        if (charactersCounter >= 102) {
-                            charactersCounter = 0;
-                            lines += 1;
+                        switch (element) {
+                            case 'a' || 'e' || 'i' || 'o' || 'u':
+                                vowels += 1;
+                                break;
+                            default:
+                                consonant += 1;
                         }
                     });
                     _d = (_c = console).log;
                     _e = "Site: ".concat;
                     return [4 /*yield*/, driver.getTitle()];
                 case 12:
-                    _d.apply(_c, [_e.apply("Site: ", [_f.sent(), " | PPL: "]).concat(lines)]);
+                    _d.apply(_c, [_e.apply("Site: ", [_f.sent()])]);
+                    console.log("Contagem de vogais: ".concat(vowels));
+                    console.log("Contagem de consoantes: ".concat(consonant));
                     return [2 /*return*/];
             }
         });

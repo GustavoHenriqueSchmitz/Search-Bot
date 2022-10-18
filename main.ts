@@ -15,24 +15,26 @@ async function initBot() {
   }
 
   await driver.get(links[0]);
-  const elementText = await driver.findElement(
-    By.xpath(
-      '/html/body/div[3]/div/div[2]/div/div[2]/article/div/div/div[2]/p[1]'
-    )
-  );
+  const elementText = await driver.findElement(By.css('body'));
   const text = await elementText.getText();
   const textCharacters = text.split('');
-  let lines = 0;
-  let charactersCounter = 0;
+
+  let vowels = 0;
+  let consonant = 0;
+
   textCharacters.forEach(element => {
-    charactersCounter += 1;
-    if (charactersCounter >= 102) {
-      charactersCounter = 0;
-      lines += 1;
+    switch (element) {
+      case 'a' || 'e' || 'i' || 'o' || 'u':
+        vowels += 1;
+        break;
+
+      default:
+        consonant += 1;
     }
   });
 
-  console.log(`Site: ${await driver.getTitle()} | PPL: ${lines}`);
+  console.log(`Site: ${await driver.getTitle()}`);
+  console.log(`Contagem de vogais: ${vowels}`);
+  console.log(`Contagem de consoantes: ${consonant}\n`);
 }
-
 initBot();
