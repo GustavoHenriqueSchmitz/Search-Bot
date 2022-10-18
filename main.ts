@@ -1,7 +1,11 @@
 import {Builder, By, WebDriver} from 'selenium-webdriver';
+import {Options} from 'selenium-webdriver/firefox';
 
 async function initBot() {
-  const driver: WebDriver = await new Builder().forBrowser('firefox').build();
+  const driver: WebDriver = await new Builder()
+    .setFirefoxOptions(new Options().headless())
+    .forBrowser('firefox')
+    .build();
   await driver.get('https://www.google.com/search?q=Parkour');
   const elementsLink = await driver.findElements(By.className('yuRUbf'));
   const links: string[] = [];
@@ -12,10 +16,23 @@ async function initBot() {
 
   await driver.get(links[0]);
   const elementText = await driver.findElement(
-    By.xpath('/html/body/div[1]/div/div[4]/main/div[2]/div[3]/div[1]/p[1]')
+    By.xpath(
+      '/html/body/div[3]/div/div[2]/div/div[2]/article/div/div/div[2]/p[1]'
+    )
   );
   const text = await elementText.getText();
-  console.log(`Site: ${await driver.getTitle()} | PPL: ${text.length}`);
+  const textCharacters = text.split('');
+  let lines = 0;
+  let charactersCounter = 0;
+  textCharacters.forEach(element => {
+    charactersCounter += 1;
+    if (charactersCounter >= 102) {
+      charactersCounter = 0;
+      lines += 1;
+    }
+  });
+
+  console.log(`Site: ${await driver.getTitle()} | PPL: ${lines}`);
 }
 
 initBot();
