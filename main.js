@@ -10,10 +10,9 @@ async function initBot() {
     .forBrowser('firefox')
     .build();
 
-  // eslint-disable-next-line no-constant-condition
   while (true) {
+    // Asks the user what they want to search for
     let search = '';
-    // eslint-disable-next-line no-constant-condition
     while (true) {
       search = question('\nPesquisar por: ');
 
@@ -68,7 +67,6 @@ async function initBot() {
 
     // Ask the user if he wants to do another search
     let searchAgain = '';
-    // eslint-disable-next-line no-constant-condition
     while (true) {
       searchAgain = question('Fazer outra pesquisa [S/N]: ')
         .trim()
