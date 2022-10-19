@@ -45,7 +45,7 @@ async function initBot() {
 
       // Start the consonant and vowels quantity verification
       let vowels = 0;
-      let consonant = 0;
+      let consonants = 0;
 
       textCharacters.forEach(element => {
         switch (element) {
@@ -54,15 +54,16 @@ async function initBot() {
             break;
 
           default:
-            consonant += 1;
+            consonants += 1;
         }
       });
 
       // Print the results
       console.log(`Nome do Site: ${await driver.getTitle()}`);
       console.log(`URL: ${links[counter]}`);
+      console.log(`Contagem de letras: ${vowels + consonants}`)
       console.log(`Contagem de vogais: ${vowels}`);
-      console.log(`Contagem de consoantes: ${consonant}\n`);
+      console.log(`Contagem de consoantes: ${consonants}\n`);
     }
 
     // Ask the user if he wants to do another search
