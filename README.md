@@ -11,6 +11,8 @@ Um bot que pesquisa de acordo com o que o usuário pedir, seguindo os primeiros 
 **2.** geckodriver V0.32.0
 * https://github.com/mozilla/geckodriver/releases
 
+**=>** Extraia o arquivo geckodriver e o coloque na pasta raiz do projeto.
+
 ### Inicie o projeto
 
 **1.** Clone o projeto
