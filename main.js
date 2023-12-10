@@ -30,13 +30,13 @@ async function initBot() {
     const links = [];
 
     // Get the links
-    for (let counter = 0; counter < 5; counter += 1) {
+    for (let counter = 0; counter < 5 && counter < elementsLink.length; counter += 1) {
       const link = await elementsLink[counter].findElement(By.css('a'));
       links.push(await link.getAttribute('href'));
     }
 
     // Enter the sites and get the informations
-    for (let counter = 0; counter < 5; counter += 1) {
+    for (let counter = 0; counter < 5 && counter < elementsLink.length; counter += 1) {
       await driver.get(links[counter]);
       const elementText = await driver.findElement(By.css('body'));
       const text = await elementText.getText();
