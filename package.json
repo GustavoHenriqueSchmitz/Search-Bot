@@ -16,7 +16,7 @@
   },
   "homepage": "https://github.com/GustavoHenriqueSchmitz/Bot-de-Pesquisa#readme",
   "dependencies": {
-    "geckodriver": "^3.1.0",
+    "geckodriver": "^4.3.3",
     "readline-sync": "^1.4.10",
     "selenium-webdriver": "^4.5.0"
   }
