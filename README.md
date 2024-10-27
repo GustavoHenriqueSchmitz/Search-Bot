@@ -1,9 +1,15 @@
-# Bot-de-Pesquisa
-Um bot que pesquisa de acordo com o que o usuário pedir, seguindo os primeiros 5 resultados, sem ser anúncio. Trazendo o nome do site pesquisado, quantia de letras, vogais e consontes.
+# Search-Bot
 
-## Guia de inicialização do projeto
+## About the project
+A bot that performs a search according to the user’s requirements, following the first 5 results (excluding ads). It provides a count of letters, vowels, and consonants present on each site. 
 
-### Instale as técnologias necessárias
+## Used technologies
+- Node.js
+- Selenium
+
+## Initialization
+
+### Install the necessary tools
 
 **1.** NodeJS V16.17.1
 * https://nodejs.org
@@ -11,21 +17,28 @@ Um bot que pesquisa de acordo com o que o usuário pedir, seguindo os primeiros 
 **2.** geckodriver V0.32.0
 * https://github.com/mozilla/geckodriver/releases
 
-**=>** Extraia o arquivo geckodriver e o coloque na pasta raiz do projeto.
+**OBS:** Extract the geckodriver file and place it in the project's root folder.
 
-### Inicie o projeto
+### Start the project
 
-**1.** Clone o projeto
+**1.** Clone the project
 ```
 git clone https://github.com/GustavoHenriqueSchmitz/Bot-de-Pesquisa.git
 ```
 
-**2.** Instale as dependências, executando este comando no diretório raiz do projeto
+**2.** Install the dependencies by running this command in the project's root directory.
 ```
-npm install
+npm i
 ```
 
-**3.** Inicie o bot, executando este comando no diretório raiz do projeto
+**3.** Start the bot by running this command in the project's root directory.
 ```
 node main.js
 ```
+
+## Author
+**Gustavo Henrique Schmitz**
+
+**Linkedin:** https://www.linkedin.com/in/gustavo-henrique-schmitz  
+**Portfolio:** https://gustavohenriqueschmitz.com  
+**Email:** gustavohenriqueschmitz568@gmail.com  
