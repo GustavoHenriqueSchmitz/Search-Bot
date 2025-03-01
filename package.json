@@ -17,6 +17,9 @@
   "homepage": "https://github.com/GustavoHenriqueSchmitz/Bot-de-Pesquisa#readme",
   "dependencies": {
     "geckodriver": "^4.3.3",
+    "puppeteer": "^24.3.0",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
     "readline-sync": "^1.4.10",
     "selenium-webdriver": "^4.5.0"
   }

@@ -1,23 +1,28 @@
-import {Builder, By} from 'selenium-webdriver';
-import {Options} from 'selenium-webdriver/firefox.js';
-import {question} from 'readline-sync';
+import puppeteer from 'puppeteer-extra';
+import { question } from 'readline-sync';
 
 // Function initBot, initialize the bot
 async function initBot() {
-  // Start the browser
-  const driver = await new Builder()
-    .setFirefoxOptions(new Options().headless())
-    .forBrowser('firefox')
-    .build();
+  // Start the browse
+  const browser = await puppeteer.launch({
+    headless: false,
+    defaultViewport: null,
+    args: [
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
+      '--disable-blink-features=AutomationControlled',
+    ]
+  });
+  const [driver] = await browser.pages();
 
   while (true) {
     // Asks the user what they want to search for
     let search = '';
     while (true) {
-      search = question('\nPesquisar por: ');
+      search = question('\nSearch for: ');
 
       if (search === '') {
-        console.error('\x1b[31mValor para pesquisa vazio, digite algo.\x1b[0m');
+        console.error('\x1b[31mVSearch value is empty, digit something.\x1b[0m');
         continue;
       }
       console.log('');
@@ -25,65 +30,62 @@ async function initBot() {
     }
 
     // Start search
-    await driver.get(`https://www.google.com/search?q=${search}`);
-    const elementsLink = await driver.findElements(By.className('yuRUbf'));
+    await driver.goto(`https://www.google.com/search?q=${encodeURIComponent(search)}`, {
+      waitUntil: 'networkidle2'
+    });
+    const elementsLink = await driver.$$('div.yuRUbf a');
     const links = [];
 
     // Get the links
-    for (let counter = 0; counter < 5 && counter < elementsLink.length; counter += 1) {
-      const link = await elementsLink[counter].findElement(By.css('a'));
-      links.push(await link.getAttribute('href'));
+    for (let i = 0; i < 5 && i < elementsLink.length; i++) {
+      const href = await elementsLink[i].evaluate(el => el.href);
+      links.push(href);
     }
 
     // Enter the sites and get the informations
-    for (let counter = 0; counter < 5 && counter < elementsLink.length; counter += 1) {
-      await driver.get(links[counter]);
-      const elementText = await driver.findElement(By.css('body'));
-      const text = await elementText.getText();
-      const textCharacters = text.split('');
+    for (let i = 0; i < links.length; i++) {
+      await driver.goto(links[i], { waitUntil: 'networkidle2' });
+      const text = await driver.evaluate(() => document.body.innerText);
 
       // Start the consonant and vowels quantity verification
       let vowels = 0;
       let consonants = 0;
 
-      textCharacters.forEach(element => {
-        switch (element) {
-          case 'a' || 'e' || 'i' || 'o' || 'u':
-            vowels += 1;
-            break;
-
-          default:
-            consonants += 1;
+      for (const char of text) {
+        const lowerChar = char.toLowerCase();
+        if ('aeiou'.includes(lowerChar)) {
+          vowels++;
+        } else if (/[a-z]/.test(lowerChar)) {
+          consonants++;
         }
-      });
+      }
 
       // Print the results
-      console.log(`Nome do Site: ${await driver.getTitle()}`);
-      console.log(`URL: ${links[counter]}`);
-      console.log(`Contagem de letras: ${vowels + consonants}`)
-      console.log(`Contagem de vogais: ${vowels}`);
-      console.log(`Contagem de consoantes: ${consonants}\n`);
+      console.log(`Website name: ${await driver.title()}`);
+      console.log(`URL: ${links[i]}`);
+      console.log(`Characters count: ${vowels + consonants}`);
+      console.log(`Vowel count: ${vowels}`);
+      console.log(`Consonant count: ${consonants}\n`);
     }
 
-    // Ask the user if he wants to do another search
+    // Ask if the user wants to do another search
     let searchAgain = '';
     while (true) {
-      searchAgain = question('Fazer outra pesquisa [S/N]: ')
+      searchAgain = question('Do another search [Y/N]: ')
         .trim()
         .toUpperCase();
-      if (searchAgain !== 'N' && searchAgain !== 'S') {
-        console.error(
-          '\x1b[31mOpção inválida! Digite S para sim ou N para não.\x1b[0m'
-        );
+      if (searchAgain !== 'N' && searchAgain !== 'Y') {
+        console.error('\x1b[31mInvalid option! Enter Y for yes or N for no.\x1b[0m');
         continue;
       }
       break;
     }
     if (searchAgain === 'N') {
       break;
-    } else {
-      continue;
     }
   }
+
+  // Close the browser
+  await browser.close();
 }
 initBot();
