@@ -14,7 +14,7 @@ A bot that performs a search according to the user’s requirements, following t
 **1.** NodeJS V16.17.1
 * https://nodejs.org
 
-**2.** geckodriver V0.32.0
+**2.** geckodriver V0.32.0 - By default it should be installed in the root folder
 * https://github.com/mozilla/geckodriver/releases
 
 **OBS:** Extract the geckodriver file and place it in the project's root folder.
