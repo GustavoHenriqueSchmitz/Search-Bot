@@ -1,7 +1,10 @@
 # Search-Bot
 
 ## About the project
-A bot that performs a search according to the user’s requirements, following the first 5 results (excluding ads). It provides a count of letters, vowels, and consonants present on each site. 
+A bot that performs a search according to the user’s requirements, following the first 5 results (excluding ads). It provides a count of letters, vowels, and consonants present on each site.
+
+## Project demonstration video
+[![Bot System Demo](https://img.youtube.com/vi/uL2oMdhIdFg/0.jpg)](https://www.youtube.com/watch?v=uL2oMdhIdFg)
 
 ## Used technologies
 - Node.js
